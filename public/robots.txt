@@ -3,7 +3,7 @@ User-agent: *
 Allow: /
 
 # Host
-Host: https://pini.vercel.app
+Host: https://playpini.com
 
 # Sitemaps
-Sitemap: https://pini.vercel.app/sitemap.xml
+Sitemap: https://playpini.com/sitemap.xml

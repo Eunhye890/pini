@@ -134,5 +134,5 @@ export function generateShareText(data: BrainScoreData): string {
     return `${cat.emoji} ${cat.name}: ${bar} ${score}`;
   });
 
-  return `My Pini Brain Score 🧠\n${lines.join("\n")}\n\nPlay free at pini.vercel.app`;
+  return `My Pini Brain Score 🧠\n${lines.join("\n")}\n\nPlay free at playpini.com`;
 }

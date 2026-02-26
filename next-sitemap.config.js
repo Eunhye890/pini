@@ -1,6 +1,6 @@
 /** @type {import('next-sitemap').IConfig} */
 module.exports = {
-  siteUrl: "https://pini.vercel.app",
+  siteUrl: "https://playpini.com",
   generateRobotsTxt: true,
   sitemapSize: 7000,
   changefreq: "weekly",

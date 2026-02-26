@@ -36,7 +36,7 @@ export default function PrivacyPage() {
             Pini (&quot;we&quot;, &quot;us&quot;, &quot;our&quot;) is a free
             educational gaming platform for children and students in grades K-12.
             Our website is located at{" "}
-            <strong>https://pini.vercel.app</strong>.
+            <strong>https://playpini.com</strong>.
           </p>
         </section>
 

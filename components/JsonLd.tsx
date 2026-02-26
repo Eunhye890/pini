@@ -20,12 +20,12 @@ export function WebsiteJsonLd() {
         "@context": "https://schema.org",
         "@type": "WebSite",
         name: "Pini",
-        url: "https://pini.vercel.app",
+        url: "https://playpini.com",
         description:
           "1000+ free games for kids & students K-12. Puzzles, strategy, memory and more. No signup needed.",
         potentialAction: {
           "@type": "SearchAction",
-          target: "https://pini.vercel.app/games?q={search_term_string}",
+          target: "https://playpini.com/games?q={search_term_string}",
           "query-input": "required name=search_term_string",
         },
       }}
@@ -41,7 +41,7 @@ export function GameJsonLd({ game }: { game: Game }) {
         "@type": "VideoGame",
         name: game.title,
         description: game.description,
-        url: `https://pini.vercel.app/games/${game.id}`,
+        url: `https://playpini.com/games/${game.id}`,
         image: game.thumbnail,
         playMode: "SinglePlayer",
         applicationCategory: "Game",
@@ -80,7 +80,7 @@ export function GameListJsonLd({
         itemListElement: games.slice(0, 20).map((game, i) => ({
           "@type": "ListItem",
           position: i + 1,
-          url: `https://pini.vercel.app/games/${game.id}`,
+          url: `https://playpini.com/games/${game.id}`,
           name: game.title,
         })),
       }}

@@ -36,7 +36,7 @@ export default async function CategoryPage({ params }: PageProps) {
       <GameListJsonLd
         name={`${catInfo.name} Games — Pini`}
         games={games}
-        url={`https://pini.vercel.app/category/${category}`}
+        url={`https://playpini.com/category/${category}`}
       />
       {/* Breadcrumb */}
       <nav className="flex items-center gap-1 text-xs text-gray-500 mb-4 font-bold">

@@ -95,7 +95,7 @@ export default async function GamePage({ params }: PageProps) {
         <ShareButton
           title={game.title}
           text={`Play ${game.title} for FREE! 🎮`}
-          url={`https://pini.vercel.app/games/${game.id}`}
+          url={`https://playpini.com/games/${game.id}`}
           className="bg-[#5CA4E7] text-white px-4 py-1.5"
         />
       </div>

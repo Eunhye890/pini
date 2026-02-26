@@ -40,13 +40,13 @@ export const metadata: Metadata = {
     "coding games",
     "strategy games",
   ],
-  metadataBase: new URL("https://pini.vercel.app"),
+  metadataBase: new URL("https://playpini.com"),
   openGraph: {
     title: "Pini — Play Smart. Play Free. | K-12 Brain Games",
     description: "900+ free brain-training games for kids & students. Puzzles, logic, strategy and more. No signup — just play!",
     type: "website",
     locale: "en_US",
-    url: "https://pini.vercel.app",
+    url: "https://playpini.com",
     siteName: "Pini",
   },
   twitter: {
