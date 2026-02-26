@@ -34,7 +34,7 @@ export default function HomePage() {
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
             <div>
               <div>
-                <h1 className="font-pixel text-lg sm:text-xl leading-relaxed mb-2">
+                <h1 className="font-pixel text-[11px] sm:text-xl leading-relaxed mb-2">
                   <span className="text-[#FFD54F]">★</span> PLAY SMART. PLAY FREE. <span className="text-[#FFD54F]">★</span>
                 </h1>
                 <p className="text-sm sm:text-base text-white/80">
@@ -91,11 +91,11 @@ export default function HomePage() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 py-5 bg-checker">
 
         {/* Grade Level Buttons */}
-        <div className="flex flex-wrap items-center gap-2 mb-3">
-          <span className="font-pixel text-[10px] text-gray-500 mr-1">AGE:</span>
+        <div className="flex flex-wrap items-center gap-1.5 sm:gap-2 mb-3">
+          <span className="font-pixel text-[8px] sm:text-[10px] text-gray-500 mr-0.5 sm:mr-1">AGE:</span>
           <button
             onClick={() => setSelectedGrade(0)}
-            className={`pixel-btn text-xs font-bold px-4 py-1.5 ${
+            className={`pixel-btn text-[10px] sm:text-xs font-bold px-2.5 sm:px-4 py-1 sm:py-1.5 ${
               selectedGrade === 0 ? "bg-[#2d2d2d] text-white" : "bg-white text-[#2d2d2d]"
             }`}
           >
@@ -113,7 +113,7 @@ export default function HomePage() {
               <button
                 key={grade.level}
                 onClick={() => { setSelectedGrade(selectedGrade === grade.level ? 0 : grade.level); setVisibleCount(24); }}
-                className={`pixel-btn text-xs font-bold px-4 py-1.5 ${
+                className={`pixel-btn text-[10px] sm:text-xs font-bold px-2.5 sm:px-4 py-1 sm:py-1.5 ${
                   selectedGrade === grade.level ? c.active : c.idle
                 }`}
               >
@@ -124,11 +124,11 @@ export default function HomePage() {
         </div>
 
         {/* Category Buttons */}
-        <div className="flex flex-wrap items-center gap-2 mb-5">
-          <span className="font-pixel text-[10px] text-gray-500 mr-1">TYPE:</span>
+        <div className="flex flex-wrap items-center gap-1.5 sm:gap-2 mb-5">
+          <span className="font-pixel text-[8px] sm:text-[10px] text-gray-500 mr-0.5 sm:mr-1">TYPE:</span>
           <button
             onClick={() => setSelectedCategory("all")}
-            className={`pixel-btn text-xs font-bold px-4 py-1.5 ${
+            className={`pixel-btn text-[10px] sm:text-xs font-bold px-2.5 sm:px-4 py-1 sm:py-1.5 ${
               selectedCategory === "all" ? "bg-[#2d2d2d] text-white" : "bg-white text-[#2d2d2d]"
             }`}
           >
@@ -140,7 +140,7 @@ export default function HomePage() {
               <button
                 key={cat.id}
                 onClick={() => { setSelectedCategory(selectedCategory === cat.id ? "all" : cat.id); setVisibleCount(24); }}
-                className={`pixel-btn text-xs font-bold px-3 py-1.5 ${
+                className={`pixel-btn text-[10px] sm:text-xs font-bold px-2 sm:px-3 py-1 sm:py-1.5 ${
                   isActive ? "bg-[#FFD54F] text-[#2d2d2d]" : "bg-white text-[#2d2d2d]"
                 }`}
               >

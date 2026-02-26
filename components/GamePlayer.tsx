@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 
 interface GamePlayerProps {
   embedUrl: string;
@@ -13,6 +13,7 @@ export default function GamePlayer({ embedUrl, title }: GamePlayerProps) {
   const [isMobile, setIsMobile] = useState(false);
   const [isPortrait, setIsPortrait] = useState(false);
   const [showFullscreenHint, setShowFullscreenHint] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const checkMobile = () => {
@@ -26,7 +27,48 @@ export default function GamePlayer({ embedUrl, title }: GamePlayerProps) {
     return () => window.removeEventListener("resize", checkMobile);
   }, []);
 
-  // 모바일에서 게임 로드 완료 시 전체화면 힌트 표시
+  // Listen for native fullscreen changes (e.g. user presses Escape)
+  useEffect(() => {
+    const handleFullscreenChange = () => {
+      if (!document.fullscreenElement) {
+        setIsFullscreen(false);
+      }
+    };
+    document.addEventListener("fullscreenchange", handleFullscreenChange);
+    return () => document.removeEventListener("fullscreenchange", handleFullscreenChange);
+  }, []);
+
+  const enterFullscreen = useCallback(async () => {
+    const el = containerRef.current;
+    if (!el) return;
+
+    try {
+      // Try native Fullscreen API first (hides address bar)
+      if (el.requestFullscreen) {
+        await el.requestFullscreen();
+      } else if ((el as HTMLDivElement & { webkitRequestFullscreen?: () => Promise<void> }).webkitRequestFullscreen) {
+        await (el as HTMLDivElement & { webkitRequestFullscreen: () => Promise<void> }).webkitRequestFullscreen();
+      }
+    } catch {
+      // Fullscreen API not available — fallback to CSS fullscreen
+    }
+
+    setIsFullscreen(true);
+    setShowFullscreenHint(false);
+  }, []);
+
+  const exitFullscreen = useCallback(async () => {
+    try {
+      if (document.fullscreenElement) {
+        await document.exitFullscreen();
+      }
+    } catch {
+      // ignore
+    }
+    setIsFullscreen(false);
+  }, []);
+
+  // Show fullscreen hint on mobile after game loads
   useEffect(() => {
     if (!isLoading && isMobile && !isFullscreen) {
       setShowFullscreenHint(true);
@@ -34,11 +76,11 @@ export default function GamePlayer({ embedUrl, title }: GamePlayerProps) {
   }, [isLoading, isMobile, isFullscreen]);
 
   return (
-    <div className={isFullscreen ? "game-player-fullscreen" : "relative"}>
+    <div ref={containerRef} className={isFullscreen ? "game-player-fullscreen" : "relative"}>
       {/* Fullscreen exit */}
       {isFullscreen && (
         <button
-          onClick={() => setIsFullscreen(false)}
+          onClick={exitFullscreen}
           className="absolute top-3 right-3 z-50 pixel-btn bg-[#FFD54F] text-[#2d2d2d] px-3 py-1 font-pixel text-[8px]"
         >
           ✕ EXIT
@@ -75,7 +117,7 @@ export default function GamePlayer({ embedUrl, title }: GamePlayerProps) {
       {showFullscreenHint && !isFullscreen && (
         <div
           className="absolute inset-0 bg-black/50 flex items-center justify-center z-20 cursor-pointer"
-          onClick={() => { setIsFullscreen(true); setShowFullscreenHint(false); }}
+          onClick={enterFullscreen}
         >
           <div className="text-center px-6 py-4 bg-[#2d2d2d] pixel-border">
             <div className="text-3xl mb-2">📱</div>
@@ -106,7 +148,7 @@ export default function GamePlayer({ embedUrl, title }: GamePlayerProps) {
       {!isFullscreen && (
         <div className="flex justify-center mt-4">
           <button
-            onClick={() => { setIsFullscreen(true); setShowFullscreenHint(false); }}
+            onClick={enterFullscreen}
             className="pixel-btn bg-[#5CA4E7] text-white px-5 py-2 font-pixel text-[9px]"
           >
             ⛶ FULLSCREEN
