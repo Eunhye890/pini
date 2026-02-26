@@ -1,0 +1,167 @@
+@import "tailwindcss";
+
+:root {
+  --background: #FFF8E7;
+  --foreground: #2d2d2d;
+  --pixel-shadow: #1a1a2e;
+  --color-yellow: #FFD54F;
+  --color-blue: #5CA4E7;
+  --color-red: #F26B4E;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-pixel: var(--font-pixel);
+  --font-body: var(--font-body);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-body), "Courier New", monospace;
+  image-rendering: pixelated;
+}
+
+/* Pixel heading font */
+.font-pixel {
+  font-family: var(--font-pixel), monospace;
+}
+
+/* Pixel border utility */
+.pixel-border {
+  border: 3px solid #2d2d2d;
+  box-shadow:
+    3px 3px 0px #2d2d2d,
+    inset -2px -2px 0px rgba(0,0,0,0.1),
+    inset 2px 2px 0px rgba(255,255,255,0.3);
+}
+
+.pixel-border-sm {
+  border: 2px solid #2d2d2d;
+  box-shadow: 2px 2px 0px #2d2d2d;
+}
+
+.pixel-border-white {
+  border: 3px solid #fff;
+  box-shadow: 3px 3px 0px rgba(0,0,0,0.3);
+}
+
+/* Pixel button */
+.pixel-btn {
+  border: 3px solid #2d2d2d;
+  box-shadow: 4px 4px 0px #2d2d2d;
+  transition: all 0.1s ease;
+  cursor: pointer;
+  image-rendering: pixelated;
+}
+
+.pixel-btn:hover {
+  transform: translate(1px, 1px);
+  box-shadow: 3px 3px 0px #2d2d2d;
+}
+
+.pixel-btn:active {
+  transform: translate(3px, 3px);
+  box-shadow: 1px 1px 0px #2d2d2d;
+}
+
+/* Pixel card */
+.pixel-card {
+  border: 3px solid #2d2d2d;
+  box-shadow: 4px 4px 0px #2d2d2d;
+  transition: all 0.15s ease;
+  background: white;
+}
+
+.pixel-card:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0px #2d2d2d;
+}
+
+/* Game player fullscreen */
+.game-player-fullscreen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 50;
+  background: #000;
+}
+
+/* Retro scanline overlay (subtle) */
+.scanlines::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, 0.03) 2px,
+    rgba(0, 0, 0, 0.03) 4px
+  );
+  pointer-events: none;
+}
+
+/* Pixel star decoration */
+@keyframes twinkle {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+.star-twinkle {
+  animation: twinkle 2s ease-in-out infinite;
+}
+
+/* Bouncy hover */
+@keyframes bounce-sm {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-3px); }
+}
+
+.hover-bounce:hover {
+  animation: bounce-sm 0.4s ease;
+}
+
+/* Character bounce animation */
+@keyframes char-bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+.char-bounce {
+  animation: char-bounce 2s ease-in-out infinite;
+}
+
+.char-bounce-delay-1 {
+  animation: char-bounce 2s ease-in-out infinite;
+  animation-delay: 0.3s;
+}
+
+.char-bounce-delay-2 {
+  animation: char-bounce 2s ease-in-out infinite;
+  animation-delay: 0.6s;
+}
+
+/* Warm checkered background pattern */
+.bg-checker {
+  background-image:
+    linear-gradient(45deg, rgba(0,0,0,0.02) 25%, transparent 25%),
+    linear-gradient(-45deg, rgba(0,0,0,0.02) 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, rgba(0,0,0,0.02) 75%),
+    linear-gradient(-45deg, transparent 75%, rgba(0,0,0,0.02) 75%);
+  background-size: 20px 20px;
+  background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+}
+
+/* Pixel tag */
+.pixel-tag {
+  border: 2px solid #2d2d2d;
+  box-shadow: 2px 2px 0px #2d2d2d;
+  font-family: var(--font-pixel), monospace;
+  font-size: 8px;
+  padding: 2px 6px;
+  image-rendering: pixelated;
+}
