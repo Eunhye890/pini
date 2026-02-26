@@ -108,7 +108,7 @@ export default function GamePlayer({ embedUrl, title }: GamePlayerProps) {
           title={title}
           className="w-full h-full"
           allow="autoplay; fullscreen; gamepad"
-          sandbox="allow-scripts allow-same-origin allow-popups"
+          sandbox="allow-scripts allow-same-origin"
           onLoad={() => setIsLoading(false)}
         />
       </div>

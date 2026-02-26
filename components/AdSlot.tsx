@@ -1,11 +1,13 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 interface AdSlotProps {
   slot: string;
   format?: "auto" | "rectangle" | "horizontal" | "vertical";
   className?: string;
+  /** Minimum number of game page visits before showing ads (0 = show immediately) */
+  minGames?: number;
 }
 
 /**
@@ -13,12 +15,23 @@ interface AdSlotProps {
  * - Requires NEXT_PUBLIC_ADSENSE_CLIENT env var to display real ads
  * - Shows placeholder when AdSense is not configured
  * - Includes TFCD (Tag For Child-Directed Treatment) for COPPA compliance
+ * - minGames: only show ads after user has visited N game pages in this session
  */
-export default function AdSlot({ slot, format = "auto", className = "" }: AdSlotProps) {
+export default function AdSlot({ slot, format = "auto", className = "", minGames = 0 }: AdSlotProps) {
   const adClient = process.env.NEXT_PUBLIC_ADSENSE_CLIENT;
+  const [visible, setVisible] = useState(minGames === 0);
 
   useEffect(() => {
-    if (adClient) {
+    if (minGames > 0) {
+      const count = parseInt(sessionStorage.getItem("pini_games_played") || "0", 10);
+      if (count >= minGames) {
+        setVisible(true);
+      }
+    }
+  }, [minGames]);
+
+  useEffect(() => {
+    if (adClient && visible) {
       try {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         ((window as any).adsbygoogle = (window as any).adsbygoogle || []).push({});
@@ -26,7 +39,9 @@ export default function AdSlot({ slot, format = "auto", className = "" }: AdSlot
         // AdSense not loaded yet
       }
     }
-  }, [adClient]);
+  }, [adClient, visible]);
+
+  if (!visible) return null;
 
   if (!adClient) {
     return (

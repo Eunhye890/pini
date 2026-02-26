@@ -15,6 +15,9 @@ export default function TrackGamePlay({ category }: TrackGamePlayProps) {
     if (!tracked.current && category) {
       tracked.current = true;
       incrementScore(category);
+      // Increment session game counter for ad gating
+      const count = parseInt(sessionStorage.getItem("pini_games_played") || "0", 10);
+      sessionStorage.setItem("pini_games_played", String(count + 1));
     }
   }, [category, incrementScore]);
 
