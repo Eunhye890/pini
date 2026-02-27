@@ -144,11 +144,6 @@ export default async function GamePage({ params }: PageProps) {
         </div>
       </div>
 
-      {/* Ad: Above related games */}
-      <div className="mb-8">
-        <AdSlot slot="game-below-player" format="horizontal" minGames={2} />
-      </div>
-
       {/* Related Games */}
       {relatedGames.length > 0 && (
         <section>
